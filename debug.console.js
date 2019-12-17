@@ -56,6 +56,7 @@
     iframeDocument.write("<!DOCTYPE html><html><head><style>" +
         "  .togger-btn{" +
         "    position: fixed;" +
+        "    cursor: pointer;" +
         "    top: 5px;" +
         "    right: 5px;" +
         "    z-index: 9999;" +
@@ -73,6 +74,12 @@
         "  .show-list{" +
         "    display:none;" +
         "    padding:10px" +
+        "  }" +
+        "  .show-list li:not(:first-child){" +
+        "    border-top:1px solid white;" +
+        "  }" +
+        "  .show-list li{" +
+        "    padding:7px 0;" +
         "  }" +
         "</style>" +
         "<script>" +
@@ -100,10 +107,16 @@
         "</body></html>");
     iframeDocument.close();
 
+    // 获取时间
+    var getTime = function () {
+        var date = new Date();
+        return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    };
+
     var appendInfo = function (text, color) {
         var li = iframeDocument.createElement("li");
         li.style.color = color;
-        li.innerText = text;
+        li.innerHTML = "<i style='color:gray;font-style:normal;padding-right:10px;'>" + getTime() + "</i>" + text;
         iframeDocument.getElementById('showlist').appendChild(li);
     }
 
@@ -112,29 +125,37 @@
      * ----------------------------------------
      */
 
-    console.log = function (content) {
+    var _toString = function (contents) {
+        var result = "", i;
+        for (i = 0; i < contents.length; i++) {
+            result += contents[i];
+        }
+        return result;
+    };
+
+    console.log = function () {
         log.apply(this, arguments);
-        appendInfo("[log]>>>" + content, 'gray');
+        appendInfo("[log]>>>" + _toString(arguments), 'gray');
     };
-    console.info = function (content) {
+    console.info = function () {
         info.apply(this, arguments);
-        appendInfo("[info]>>>" + content, 'green');
+        appendInfo("[info]>>>" + _toString(arguments), 'green');
     };
-    console.debug = function (content) {
+    console.debug = function () {
         debug.apply(this, arguments);
-        appendInfo("[debug]>>>" + content, 'blue');
+        appendInfo("[debug]>>>" + _toString(arguments), 'blue');
     };
-    console.warn = function (content) {
+    console.warn = function () {
         warn.apply(this, arguments);
-        appendInfo("[warn]>>>" + content, '#f1c010');
+        appendInfo("[warn]>>>" + _toString(arguments), '#f1c010');
     };
-    console.error = function (content) {
+    console.error = function () {
         error.apply(this, arguments);
-        appendInfo("[apply]>>>" + content, 'red');
+        appendInfo("[error]>>>" + _toString(arguments), 'red');
     };
-    console.trace = function (content) {
+    console.trace = function () {
         trace.apply(this, arguments);
-        appendInfo("[trace]>>>" + content, 'white');
+        appendInfo("[trace]>>>" + _toString(arguments), 'white');
     };
 
     bindEvent(window, 'error', function (content) {
