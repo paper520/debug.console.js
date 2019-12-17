@@ -56,23 +56,22 @@
     iframeDocument.write("<!DOCTYPE html><html><head><style>" +
         "  .togger-btn{" +
         "    position: fixed;" +
-        "    top: 0px;" +
-        "    right: 0px;" +
+        "    top: 5px;" +
+        "    right: 5px;" +
         "    z-index: 9999;" +
-        "    background-color: dodgerblue;" +
+        "    background-color: #ff1e8a;" +
         "    margin: 0px;" +
-        "    width: 40px;" +
-        "    height: 40px;" +
-        "    border: 1px solid dodgerblue;" +
+        "    width: 35px;" +
+        "    height: 35px;" +
+        "    border: 2px dashed #ffffff;" +
         "    border-radius: 50%;" +
-        "    line-height: 40px;" +
+        "    line-height: 35px;" +
         "    text-align: center;" +
-        "    font-size: 0.5em;" +
+        "    font-size: 14px;" +
         "    color: white;" +
         "  }" +
         "  .show-list{" +
         "    display:none;" +
-        "    background-color: #e8f0fe8c;" +
         "    padding:10px" +
         "  }" +
         "</style>" +
@@ -84,10 +83,12 @@
         "      document.getElementById('showlist').style.display='block';" +
         "      iframe.style.width='100vw';" +
         "      iframe.style.height='100vh';" +
+        "      iframe.style.backgroundColor='#e4e1e1';" +
         "    }else{" +
         "      document.getElementById('showlist').style.display='none';" +
-        "      iframe.style.width='40px';" +
-        "      iframe.style.height='40px';" +
+        "      iframe.style.width='50px';" +
+        "      iframe.style.height='50px';" +
+        "      iframe.style.backgroundColor='';" +
         "    }" +
         "    isHidden=!isHidden;" +
         "  }" +
@@ -125,7 +126,7 @@
     };
     console.warn = function (content) {
         warn.apply(this, arguments);
-        appendInfo("[warn]>>>" + content, 'yellow');
+        appendInfo("[warn]>>>" + content, '#f1c010');
     };
     console.error = function (content) {
         error.apply(this, arguments);
