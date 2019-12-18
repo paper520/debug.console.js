@@ -6,7 +6,7 @@
 ## How to use?
 由于是调试工具，实际只应该出现在开发或测试环境中，请直接在index.html中引入即可：
 
-```js
+```html
 <script src="debug.console.js"></script>
 ```
 
