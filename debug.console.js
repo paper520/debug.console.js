@@ -113,10 +113,15 @@
         return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     };
 
-    var appendInfo = function (text, color) {
+    var appendInfo = function (type, text, color) {
         var li = iframeDocument.createElement("li");
         li.style.color = color;
-        li.innerHTML = "<i style='color:gray;font-style:normal;padding-right:10px;'>" + getTime() + "</i>" + text;
+        li.innerHTML = "<i style='color:gray;font-style:normal;padding-right:10px;'>" +
+            getTime() +
+            "</i><i style='color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:" + color + ";margin-right:10px;'>" +
+            type +
+            "</i>" +
+            "<div style='padding:10px 0;'>" + text + "</div>";
         iframeDocument.getElementById('showlist').appendChild(li);
     }
 
@@ -126,7 +131,8 @@
      */
 
     var _toString = function (contents) {
-        var result = "", i;
+        var result = "",
+            i;
         for (i = 0; i < contents.length; i++) {
             result += contents[i];
         }
@@ -135,32 +141,32 @@
 
     console.log = function () {
         log.apply(this, arguments);
-        appendInfo("[log]>>>" + _toString(arguments), 'gray');
+        appendInfo("log", _toString(arguments), 'gray');
     };
     console.info = function () {
         info.apply(this, arguments);
-        appendInfo("[info]>>>" + _toString(arguments), 'green');
+        appendInfo("info", _toString(arguments), 'green');
     };
     console.debug = function () {
         debug.apply(this, arguments);
-        appendInfo("[debug]>>>" + _toString(arguments), 'blue');
+        appendInfo("debug", _toString(arguments), 'blue');
     };
     console.warn = function () {
         warn.apply(this, arguments);
-        appendInfo("[warn]>>>" + _toString(arguments), '#f1c010');
+        appendInfo("warn", _toString(arguments), '#f1c010');
     };
     console.error = function () {
         error.apply(this, arguments);
-        appendInfo("[error]>>>" + _toString(arguments), 'red');
+        appendInfo("error", _toString(arguments), 'red');
     };
     console.trace = function () {
         trace.apply(this, arguments);
-        appendInfo("[trace]>>>" + _toString(arguments), 'white');
+        appendInfo("trace", _toString(arguments), 'white');
     };
 
     bindEvent(window, 'error', function (content) {
         content = content.message + " " + content.filename + " " + content.lineno + " \nstack :\n" + content.error.stack;
-        appendInfo("[catch error]>>>" + content, 'red');
+        appendInfo("catch ", content, 'red');
     })
 
 })(window);
