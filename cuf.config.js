@@ -11,6 +11,7 @@ let banner = function (pkg) {
 * Copyright (c) 2019 - `+ new Date().getFullYear() + ` ` + pkg.author + `
 * @license `+ pkg.license + `
 * 2019-12-17 
+* v`+ pkg.version + `
 */\n\n`;
 
 };

@@ -12,6 +12,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@yelloxing/debugger@0.1.0/build/debug.console.min.js"></script>
 ```
 
+如果你想通过npm方式管理，请先安装：
+
+```bash
+npm install --save-dev @yelloxing/debugger
+```
+
+安装好以后引入即可：
+
+```js
+import '@yelloxing/debugger';
+```
+
 ## License
 
 [MIT](https://github.com/yelloxing/debug.console.js/blob/master/LICENSE)
