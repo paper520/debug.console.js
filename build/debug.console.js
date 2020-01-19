@@ -1,8 +1,8 @@
 /*! git+https://github.com/yelloxing/debug.console.js.git
-* Copyright (c) 2019 - 2019 心叶
+* Copyright (c) 2019 - 2020 心叶
 * @license MIT
 * 2019-12-17 
-* v0.1.1
+* v0.1.2
 */
 
 "use strict";
@@ -12,7 +12,7 @@
 
   var frameStyle = "\ndisplay: block;\nposition: fixed;\ntop: 0px;\nright: 0px;\nz-index: 9999;\nmargin: 0px;\nwidth: 50px;\nheight: 50px;\nline-height: 50px;\ntext-align: center;\nborder: 0px;\n";
 
-  var frameHTML = "\n<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    .togger-btn{\n      position: fixed;\n      cursor: pointer;\n      top: 5px;\n      right: 5px;\n      z-index: 9999;\n      background-color: #ff1e8a;\n      margin: 0px;\n      width: 35px;\n      height: 35px;\n      border: 2px dashed #ffffff;\n      border-radius: 50%;\n      line-height: 35px;\n      text-align: center;\n      font-size: 14px;\n      color: white;\n    }\n    .show-list{\n      display:none;\n      padding:10px\n    }\n    .show-list li:not(:first-child){\n      border-top:1px solid white;\n    }\n    .show-list li{\n      padding:7px 0;\n    }\n  </style>\n  <script>\n    var isHidden=true;\n    function togger(){\n      var iframe=window.parent.document.getElementById('debug-console-js');\n      if(isHidden){\n        document.getElementById('showlist').style.display='block';\n        iframe.style.width='100vw';\n        iframe.style.height='100vh';\n        iframe.style.backgroundColor='#e4e1e1';\n      }else{\n        document.getElementById('showlist').style.display='none';\n        iframe.style.width='50px';\n        iframe.style.height='50px';\n        iframe.style.backgroundColor='';\n      }\n      isHidden=!isHidden;\n    }\n  </script>\n</head>\n<body style='margin:0;'>\n  <ul id='showlist' class='show-list'>\n  </ul>\n  <div class='togger-btn' onclick='togger()'>\u8C03\u8BD5</div>\n</body>\n</html>\n";
+  var frameHTML = "\n<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    .togger-btn{\n      position: fixed;\n      cursor: pointer;\n      top: 5px;\n      right: 5px;\n      z-index: 9999;\n      background-color: #ff1e8a;\n      margin: 0px;\n      width: 35px;\n      height: 35px;\n      border: 2px dashed #ffffff;\n      border-radius: 50%;\n      line-height: 35px;\n      text-align: center;\n      font-size: 14px;\n      color: white;\n    }\n    .show-list{\n      display:none;\n      padding:10px\n    }\n    .show-list li:not(:first-child){\n      border-bottom:1px solid white;\n    }\n    .show-list li{\n      padding:7px 0;\n    }\n  </style>\n  <script>\n    var isHidden=true;\n    function togger(){\n      var iframe=window.parent.document.getElementById('debug-console-js');\n      if(isHidden){\n        document.getElementById('showlist').style.display='block';\n        iframe.style.width='100vw';\n        iframe.style.height='100vh';\n        iframe.style.backgroundColor='#e4e1e1';\n      }else{\n        document.getElementById('showlist').style.display='none';\n        iframe.style.width='50px';\n        iframe.style.height='50px';\n        iframe.style.backgroundColor='';\n      }\n      isHidden=!isHidden;\n    }\n  </script>\n</head>\n<body style='margin:0;'>\n  <ul id='showlist' class='show-list'>\n    <li><a target=\"_blank\" href='https://github.com/yelloxing/debug.console.js/issues'>\u4F7F\u7528\u7684\u65F6\u5019\uFF0C\u6709\u7591\u95EE\u6216\u60F3\u6CD5\uFF0C\u70B9\u51FB\u6B64\u5904\u544A\u77E5\u6211\u4EEC\uFF01</a></li>\n  </ul>\n  <div class='togger-btn' onclick='togger()'>\u8C03\u8BD5</div>\n</body>\n</html>\n";
 
   // 绑定事件
   function bindEvent(target, eventType, callback) {
@@ -49,7 +49,7 @@
   var appendInfo = function appendInfo(type, text, color) {
     var li = iframeDocument.createElement("li");
     li.style.color = color;
-    li.innerHTML = "\n  <i style='color:gray;font-style:normal;padding-right:10px;'>\n    " + getTime() + "\n  </i>\n  <i style='color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:" + color + ";margin-right:10px;'>\n    " + type + "\n  </i>\n  <div style='padding:10px 0;'>\n    " + text + "\n  </div>\n";
+    li.innerHTML = "\n  <i style='color:gray;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>\n    " + getTime() + "\n  </i>\n  <i style='color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:" + color + ";margin-right:10px;'>\n    " + type + "\n  </i>\n  <div style='padding:10px 0;'>\n    " + text + "\n  </div>\n";
     iframeDocument.getElementById('showlist').appendChild(li);
   };
 

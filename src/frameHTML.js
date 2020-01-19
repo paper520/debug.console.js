@@ -25,7 +25,7 @@ export default `
       padding:10px
     }
     .show-list li:not(:first-child){
-      border-top:1px solid white;
+      border-bottom:1px solid white;
     }
     .show-list li{
       padding:7px 0;
@@ -52,6 +52,7 @@ export default `
 </head>
 <body style='margin:0;'>
   <ul id='showlist' class='show-list'>
+    <li><a target="_blank" href='https://github.com/yelloxing/debug.console.js/issues'>使用的时候，有疑问或想法，点击此处告知我们！</a></li>
   </ul>
   <div class='togger-btn' onclick='togger()'>调试</div>
 </body>

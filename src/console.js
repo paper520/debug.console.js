@@ -10,7 +10,7 @@ let appendInfo = function (type, text, color) {
   let li = iframeDocument.createElement("li");
   li.style.color = color;
   li.innerHTML = `
-  <i style='color:gray;font-style:normal;padding-right:10px;'>
+  <i style='color:gray;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>
     ${getTime()}
   </i>
   <i style='color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:${color};margin-right:10px;'>
