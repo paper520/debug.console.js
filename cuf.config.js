@@ -112,7 +112,7 @@ module.exports = {
      */
     uglifyjs(cuf, pkg) {
 
-      cuf.log("\n[3]babel转义:./build/debug.console.js → ./build/debug.console.min.js + ./docs/src/assets/debug.console.download.js\n");
+      cuf.log("\n[3]压缩代码:./build/debug.console.js → ./build/debug.console.min.js + ./docs/src/assets/debug.console.download.js\n");
 
       cp.exec("uglifyjs ./build/debug.console.js -m -o ./build/uglifyjs.new.js", function (error) {
         if (error) {
