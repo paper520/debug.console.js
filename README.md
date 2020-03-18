@@ -9,7 +9,7 @@
 由于是调试工具，实际只应该出现在开发或测试环境中，请直接在index.html中引入即可：
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@yelloxing/debugger@0.1.0/build/debug.console.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yelloxing/debugger@0.1.3/build/debug.console.min.js"></script>
 ```
 
 如果你想通过npm方式管理，请先安装：
