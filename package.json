@@ -1,8 +1,8 @@
 {
   "name": "@yelloxing/debugger",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "WEB调试工具",
-  "main": "build/debug.console.js",
+  "main": "build/debug.console.min.js",
   "scripts": {
     "start": "npm install && npm run build",
     "build": "npm run build:init && npm run build:bundle && npm run build:babel && npm run build:uglifyjs && npm run build:end",
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@yelloxing/core.js": "^0.3.7",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babelify": "^8.0.0",
     "cuf": "^1.1.3",

@@ -6,11 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>测试 | debug</title>
-  <script src="../build/debug.console.min.js"></script>
+  <script src="../build/debug.console.js"></script>
 </head>
 
 <body>
   <script>
+
+    console.log({ top: "146px", left: "915px" });
+    console.log(true);
+    console.log(window);
+
+    console.log(document.getElementsByTagName('meta')[0]);
+    console.log(document.getElementsByTagName('meta'));
+
+    console.log(document.getElementsByName('dd'));
+
+    var doit = function () {
+      console.log('hello world');
+    };
+    console.log(doit);
+
+
     console.log('log');
     console.info('info');
     console.debug('debug');

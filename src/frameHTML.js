@@ -52,7 +52,7 @@ export default `
 </head>
 <body style='margin:0;'>
   <ul id='showlist' class='show-list'>
-    <li><a target="_blank" href='https://github.com/yelloxing/debug.console.js/issues'>使用的时候，有疑问或想法，点击此处告知我们！</a></li>
+    <li><a target="_blank" href='https://github.com/yelloxing/debug.console.js/issues'>使用的时候，有疑问或想法，点击此处告知我们(包括问题等)！</a></li>
   </ul>
   <div class='togger-btn' onclick='togger()'>调试</div>
 </body>
