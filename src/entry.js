@@ -1,0 +1,47 @@
+import iCrush from 'icrush';
+
+// 引入启动界面
+import App from './App.iCrush';
+
+// 引入公共样式
+import '@yelloxing/normalize.css';
+
+// 引入指令
+import './directives/ui-hidden';
+import './directives/ui-show';
+
+// 追加iframe到页面上去
+// 后期整个调试工具的内容都是在这里面进行，隔绝外部环境，避免对工作代码有不好的影响
+let iframe = document.createElement("iframe");
+iframe.setAttribute('id', '@yelloxing/debugger/iframe');
+iframe.style.cssText = `
+        display: block;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        z-index: 9999;
+        margin: 0px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        border: 0px;
+    `;
+document.documentElement.appendChild(iframe);
+
+let iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+// ifrmae中写入html模板
+iframeDocument.open();
+iframeDocument.write("<div id='root'></div>");
+iframeDocument.close();
+
+new iCrush({
+
+    //挂载点
+    el: iframeDocument.getElementById('root'),
+
+    // 启动iCrush
+    render: createElement => createElement(App)
+
+});
