@@ -25,7 +25,7 @@ module.exports = {
                 options: {
                     name: "build/[name].[ext]",
                     context: "src/asset",
-                    limit: 5000
+                    limit: 500000000
                 }
             }]
         }]

@@ -1,5 +1,25 @@
 <template>
     <div>
-        (Help)升级中
+        本项目由
+        <a href="https://github.com/yelloxing" target="_blank">心叶（yelloxing）</a>
+        开发，如果有任何问题或需要帮忙，包括加入我们帮助我们改进，都可以
+        <a href="https://github.com/yelloxing/debug.console.js/issues" target="_blank">点击此处</a>
+        联系我们！
     </div>
 </template>
+<style>
+    div {
+        text-indent: 2em;
+        line-height: 2em;
+        padding: 10px;
+        color: #795548;
+        font-size: 14px;
+        font-family: serif;
+        font-weight: 400;
+    }
+
+    div>a {
+        color: blue;
+        text-decoration: underline;
+    }
+</style>

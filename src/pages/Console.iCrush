@@ -1,11 +1,54 @@
 <template>
-    <ul id='pages-console-ul'></ul>
+    <div class='view'>
+        <div>
+            <div class='clean' @click='doClean()'>清空</div>
+            <div class="log active" ui-console-type:log='ul'>log</div>
+            <div class="info active" ui-console-type:info='ul'>info</div>
+            <div class="debug active" ui-console-type:debug='ul'>debug</div>
+            <div class="warn active" ui-console-type:warn='ul'>warn</div>
+            <div class="error active" ui-console-type:error='ul'>error</div>
+            <div class="trace active" ui-console-type:trace='ul'>trace</div>
+        </div>
+        <ul id='pages-console-ul'></ul>
+    </div>
 </template>
 <script>
     import toString from '../services/toString.js';
+    import xhtml from 'xhtml.js';
     export default {
+        directive: {
+            uiConsoleType: {
+                inserted(el, binding) {
+
+                    let xhtmlEl = xhtml(el);
+
+
+                    xhtmlEl.bind('click', () => {
+                        let xhtlLi = xhtml(binding.target.$document.getElementsByName('pages-console-li-' + binding.type));
+                        if (xhtmlEl.hasClass('active')) {
+                            xhtmlEl.removeClass('active');
+                            xhtlLi.css('display', 'none');
+                        } else {
+                            xhtmlEl.addClass('active');
+                            xhtlLi.css('display', '');
+                        }
+                    });
+
+                }
+            }
+        },
+        data() {
+            return {
+                ul: null
+            };
+        },
+        methods: {
+            doClean() {
+                this.ul.innerHTML = '';
+            }
+        },
         mounted() {
-            let ul = this.$document.getElementById('pages-console-ul');
+            this.ul = this.$document.getElementById('pages-console-ul');
             this.on('console', data => {
                 let date = new Date();
                 let color = {
@@ -18,24 +61,84 @@
                 }[data.type];
                 let li = this.$document.createElement('li');
                 li.style.color = color;
+                li.setAttribute('name', 'pages-console-li-' + data.type)
                 li.innerHTML = `
-    <i style='color:gray;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>
+    <i style='font-size:12px;color:gray;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>
         ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
     </i>
-    <i style='color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:${color};margin-right:10px;'>
+    <i style='font-size:12px;color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:${color};margin-right:10px;'>
         ${data.type}
     </i>
-    <div style='padding:10px 0;'>
+    <div style='padding:10px 0;font-size:14px;line-height:2em;'>
         ${toString(data.content)}
     </div>`;
-                ul.appendChild(li);
+                this.ul.appendChild(li);
 
             });
         }
     };
 </script>
 <style>
-    ul {
-        padding: 10px;
+    div.view>div>div.log.active {
+        background-color: gray;
+    }
+
+    div.view>div>div.info.active {
+        background-color: green;
+    }
+
+    div.view>div>div.debug.active {
+        background-color: blue;
+    }
+
+    div.view>div>div.warn.active {
+        background-color: f1c010;
+    }
+
+    div.view>div>div.error.active {
+        background-color: red;
+    }
+
+    div.view>div>div.trace.active {
+        background-color: white;
+    }
+
+    div.view {
+        padding-top: 40px;
+    }
+    div.view>ul{
+        padding:0 10px;
+    }
+
+    div.view>div {
+        position: fixed;
+        top: 36px;
+        width: 100vw;
+        left: 0;
+        background-color: rgb(215 212 212);
+        padding-top: 10px;
+    }
+
+    div.view>div>div {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 0 10px;
+        height: 19px;
+        line-height: 19px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    div.view>div>div:not(.clean) {
+        font-size: 12px;
+    }
+
+    div.view>div>div.clean {
+        background-image: url('../assets/clean.png');
+        font-size: 0;
+        vertical-align: top;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 30px;
     }
 </style>
