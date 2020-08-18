@@ -32,6 +32,8 @@
     import Network from './pages/Network.iCrush';
     import Help from './pages/Help.iCrush';
 
+    import startUpConsole from './services/Console.js';
+
     export default {
         data() {
             return {
@@ -42,6 +44,7 @@
         methods: {
             changeFlag(flag) {
                 this.flag = flag;
+                this.trigger('console', '数据来了' + new Date().valueOf());
             },
             togger() {
                 let iframe = document.getElementById('@yelloxing/debugger/iframe');
@@ -63,6 +66,9 @@
             "uiConsole": Console,
             "uiNetwork": Network,
             "uiHelp": Help
+        },
+        created() {
+            startUpConsole(this);
         }
     };
 

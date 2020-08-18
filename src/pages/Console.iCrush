@@ -1,5 +1,14 @@
 <template>
-    <div>
-        (Console)升级中
-    </div>
+    <ul>
+        <li></li>
+    </ul>
 </template>
+<script>
+    export default {
+        mounted() {
+            this.on('console', data => {
+
+            });
+        }
+    };
+</script>

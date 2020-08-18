@@ -10,6 +10,9 @@ import '@yelloxing/normalize.css';
 import './directives/ui-hidden';
 import './directives/ui-show';
 
+// 引入全局通知机制
+import event from './plug/@event.js'; iCrush.use(event);
+
 // 追加iframe到页面上去
 // 后期整个调试工具的内容都是在这里面进行，隔绝外部环境，避免对工作代码有不好的影响
 let iframe = document.createElement("iframe");
