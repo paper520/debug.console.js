@@ -51,7 +51,7 @@
                 if (this.isHidden) {
                     iframe.style.width = '100vw';
                     iframe.style.height = '100vh';
-                    iframe.style.backgroundColor = 'rgb(106 102 102)';
+                    iframe.style.backgroundColor = 'rgb(215 212 212)';
                 } else {
                     iframe.style.width = '50px';
                     iframe.style.height = '50px';
@@ -81,7 +81,7 @@
 
     ul.nav>li {
         display: inline-block;
-        color: #dfdbdb;
+        color: #f8f5fb;
         font-size: 12px;
         padding: 10px;
         text-align: center;
@@ -93,7 +93,7 @@
     ul.nav[flag='network']>li.network,
     ul.nav[flag='help']>li.help {
         color: white;
-        background-color: #090924;
+        border-bottom: 2px solid red;
     }
 
     ul.nav {

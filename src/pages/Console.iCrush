@@ -1,14 +1,41 @@
 <template>
-    <ul>
-        <li></li>
-    </ul>
+    <ul id='pages-console-ul'></ul>
 </template>
 <script>
+    import toString from '../services/toString.js';
     export default {
         mounted() {
+            let ul = this.$document.getElementById('pages-console-ul');
             this.on('console', data => {
+                let date = new Date();
+                let color = {
+                    log: "gray",
+                    info: 'green',
+                    debug: 'blue',
+                    warn: 'f1c010',
+                    error: 'red',
+                    trace: 'white'
+                }[data.type];
+                let li = this.$document.createElement('li');
+                li.style.color = color;
+                li.innerHTML = `
+    <i style='color:gray;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>
+        ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
+    </i>
+    <i style='color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:${color};margin-right:10px;'>
+        ${data.type}
+    </i>
+    <div style='padding:10px 0;'>
+        ${toString(data.content)}
+    </div>`;
+                ul.appendChild(li);
 
             });
         }
     };
 </script>
+<style>
+    ul {
+        padding: 10px;
+    }
+</style>
