@@ -11,6 +11,8 @@ let console = window.console;
 // 原生的打印方法 + 当前执行的代码在堆栈中的调用路径
 const { log, info, debug, warn, error, trace } = console;
 
+import { bindEvent } from './event.js';
+
 export default function (target) {
     console.log = function () {
         log.apply(this, arguments);
@@ -54,4 +56,14 @@ export default function (target) {
             content: arguments
         });
     };
+
+    // 还有一个throw new error的捕获
+    bindEvent(window, 'error', function (content) {
+        content = content.message + " " + content.filename + " " + content.lineno + " \nstack :\n" + content.error.stack;
+        target.trigger('console', {
+            type: "error",
+            content
+        });
+    });
+
 };
