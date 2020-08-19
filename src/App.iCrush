@@ -4,7 +4,7 @@
             <ul class="nav" :flag='flag'>
                 <li @click='changeFlag("elements")' class='elements'>Elements</li>
                 <li @click='changeFlag("console")' class='console'>Console</li>
-                <li @click='changeFlag("network")' class='network'>Sources</li>
+                <li @click='changeFlag("network")' class='network'>Network</li>
                 <li @click='changeFlag("help")' class='help'>Help</li>
             </ul>
             <ul class="content-view">
@@ -44,7 +44,6 @@
         methods: {
             changeFlag(flag) {
                 this.flag = flag;
-                this.trigger('console', '数据来了' + new Date().valueOf());
             },
             togger() {
                 let iframe = document.getElementById('@yelloxing/debugger/iframe');

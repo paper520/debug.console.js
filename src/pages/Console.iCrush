@@ -1,66 +1,31 @@
 <template>
-    <div class='view'>
+    <div class='view log info debug warn error trace' id='page-console-view'>
         <div>
             <div class='clean' @click='doClean()'>清空</div>
-            <div class="log active" ui-console-type:log='ul'>log</div>
-            <div class="info active" ui-console-type:info='ul'>info</div>
-            <div class="debug active" ui-console-type:debug='ul'>debug</div>
-            <div class="warn active" ui-console-type:warn='ul'>warn</div>
-            <div class="error active" ui-console-type:error='ul'>error</div>
-            <div class="trace active" ui-console-type:trace='ul'>trace</div>
+            <div class="log" ui-togger-class:log='page-console-view'>log</div>
+            <div class="info" ui-togger-class:info='page-console-view'>info</div>
+            <div class="debug" ui-togger-class:debug='page-console-view'>debug</div>
+            <div class="warn" ui-togger-class:warn='page-console-view'>warn</div>
+            <div class="error" ui-togger-class:error='page-console-view'>error</div>
+            <div class="trace" ui-togger-class:trace='page-console-view'>trace</div>
         </div>
         <ul id='pages-console-ul'></ul>
     </div>
 </template>
 <script>
     import toString from '../services/toString.js';
-    import xhtml from 'xhtml.js';
-
-    let flagType = {
-        log: true,
-        info: true,
-        debug: true,
-        warn: true,
-        error: true,
-        trace: true
-    };
+    import '../styles/console.css';
 
     export default {
-        directive: {
-            uiConsoleType: {
-                inserted(el, binding) {
-
-                    let xhtmlEl = xhtml(el);
-
-
-                    xhtmlEl.bind('click', () => {
-                        let xhtlLi = xhtml(binding.target.$document.getElementsByName('pages-console-li-' + binding.type));
-                        if (xhtmlEl.hasClass('active')) {
-                            xhtmlEl.removeClass('active');
-                            xhtlLi.css('display', 'none');
-                            flagType[binding.type] = false;
-                        } else {
-                            xhtmlEl.addClass('active');
-                            xhtlLi.css('display', '');
-                            flagType[binding.type] = true;
-                        }
-                    });
-
-                }
-            }
-        },
-        data() {
-            return {
-                ul: null
-            };
-        },
         methods: {
             doClean() {
-                this.ul.innerHTML = '';
+                this.$document.getElementById('pages-console-ul').innerHTML = '';
             }
         },
         mounted() {
-            this.ul = this.$document.getElementById('pages-console-ul');
+
+            // 监听打印日志，然后追加到内容中去
+            let ul = this.$document.getElementById('pages-console-ul');
             this.on('console', data => {
                 let date = new Date();
                 let color = {
@@ -73,12 +38,9 @@
                 }[data.type];
                 let li = this.$document.createElement('li');
                 li.style.color = color;
-                if (!flagType[data.type]) {
-                    li.style.display = 'none';
-                }
-                li.setAttribute('name', 'pages-console-li-' + data.type)
+                li.setAttribute('class', data.type)
                 li.innerHTML = `
-    <i style='font-size:12px;color:gray;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>
+    <i style='font-size:12px;color:black;font-style:normal;padding-right:10px;width:70px;display:inline-block;'>
         ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
     </i>
     <i style='font-size:12px;color:white;font-style:normal;padding:5px;display:inline-block;width:50px;text-align:center;background-color:${color};margin-right:10px;'>
@@ -87,35 +49,74 @@
     <div style='padding:10px 0;font-size:14px;line-height:2em;'>
         ${toString(data.content)}
     </div>`;
-                this.ul.appendChild(li);
+                ul.appendChild(li);
 
             });
         }
     };
 </script>
 <style>
-    div.view>div>div.log.active {
+    /*
+        活跃的样式
+    */
+    div.view.log>div>div.log {
         background-color: gray;
     }
 
-    div.view>div>div.info.active {
+    div.view.info>div>div.info {
         background-color: green;
     }
 
-    div.view>div>div.debug.active {
+    div.view.debug>div>div.debug {
         background-color: blue;
     }
 
-    div.view>div>div.warn.active {
-        background-color: f1c010;
+    div.view.warn>div>div.warn {
+        background-color: #f1c010;
     }
 
-    div.view>div>div.error.active {
+    div.view.error>div>div.error {
         background-color: red;
     }
 
-    div.view>div>div.trace.active {
+    div.view.trace>div>div.trace {
         background-color: white;
+    }
+
+    div.view.log>div>div.log,
+    div.view.info>div>div.info,
+    div.view.debug>div>div.debug,
+    div.view.warn>div>div.warn,
+    div.view.error>div>div.error,
+    div.view.trace>div>div.trace {
+        color: black;
+    }
+
+    /*
+        不活跃的样式
+    */
+    div.view>div>div.log {
+        background-color: #c7c6c6;
+    }
+
+    div.view>div>div.info {
+        background-color: #99cb99;
+    }
+
+    div.view>div>div.debug {
+        background-color: #c0c0e6;
+    }
+
+    div.view>div>div.warn {
+        background-color: #f3e5b2;
+    }
+
+    div.view>div>div.error {
+        background-color: rgb(243, 182, 182);
+    }
+
+    div.view>div>div.trace {
+        background-color: rgb(230, 227, 227);
     }
 
     div.view {
@@ -143,6 +144,7 @@
         line-height: 19px;
         text-align: center;
         cursor: pointer;
+        color: gray;
     }
 
     div.view>div>div:not(.clean) {

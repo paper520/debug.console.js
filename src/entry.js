@@ -5,10 +5,12 @@ import App from './App.iCrush';
 
 // 引入公共样式
 import '@yelloxing/normalize.css';
+import './styles/common.css';
 
 // 引入指令
 import './directives/ui-hidden';
 import './directives/ui-show';
+import './directives/ui-togger-class';
 
 // 引入全局通知机制
 import event from './plug/@event.js'; iCrush.use(event);

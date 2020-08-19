@@ -1,0 +1,18 @@
+
+/**
+控制打印的日志是否显示
+这样筛选以后方便查看
+*/
+
+div#page-console-view>ul>li{
+    display: none;
+}
+
+div#page-console-view.log>ul>li.log,
+div#page-console-view.info>ul>li.info,
+div#page-console-view.debug>ul>li.debug,
+div#page-console-view.warn>ul>li.warn,
+div#page-console-view.error>ul>li.error,
+div#page-console-view.trace>ul>li.trace{
+    display: block;
+}
